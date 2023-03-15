@@ -5,6 +5,15 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
+
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   deploy-doc:
     runs-on: ubuntu-latest
@@ -29,3 +38,23 @@ jobs:
           BUMP_HOST: ${{ secrets.BUMP_HOST }}
           GREENLY_BUMP_TOKEN: ${{ secrets.GREENLY_BUMP_TOKEN }}
           PIPEDRIVE_BUMP_TOKEN:  ${{ secrets.PIPEDRIVE_BUMP_TOKEN }}
+
+  api-diff:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Check API diff on Bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Debug repo variables
+        run: echo "$BUMP_HOST"
+        env:
+          BUMP_HOST: ${{secrets.BUMP_HOST}}
+      - name: Comment pull request with API diff
+        uses: bump-sh/github-action@v1
+        with:
+          file: apis/greenly-openapi-source.json
+          command: diff
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          BUMP_HOST: ${{secrets.BUMP_HOST}}
