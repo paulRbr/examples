@@ -740,41 +740,9 @@
       "email": "contact@greenly.earth"
     }
   },
+
   "openapi": "3.0.0",
   "paths": {
-    "/alternatives": {
-      "get": {
-        "operationId": "GetAlternatives",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/AlternativeOutput"
-                  },
-                  "type": "array"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authentication Failed"
-          },
-          "500": {
-            "description": "An unexpected error occured while processing the request"
-          }
-        },
-        "description": "Retrieve the details of all low-carbon alternatives, either advices or low-carbon provider.",
-        "summary": "Get all alternatives",
-        "tags": [
-          "alternatives"
-        ],
-        "security": [],
-        "parameters": []
-      }
-    },
     "/alternatives/{id}": {
       "get": {
         "operationId": "GetAlternative",
