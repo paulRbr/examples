@@ -3,7 +3,7 @@ name: API diff on Pull Requests
 on:
   pull_request_target:
     branches:
-      - main
+      - unreleased-action-paulrbr
 
 
 permissions:
@@ -46,7 +46,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Comment pull request with API diff
-        uses: bump-sh/github-action@v1
+        uses: paulrbr/github-action@upgrade-dependencies
         with:
           doc: greenly
           token: ${{ secrets.GREENLY_BUMP_TOKEN }}
