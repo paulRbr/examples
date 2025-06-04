@@ -1,6 +1,6 @@
 openapi: "3.0.2"
 info:
-  title: Bump Api V2
+  title: Bump Api V3
   description: >
     This is the official Bump API documentation. Obviously created with Bump.
   version: "1.0"
