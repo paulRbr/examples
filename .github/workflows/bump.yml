@@ -25,4 +25,4 @@ jobs:
           doc: bump
           token: ${{secrets.BUMP_TOKEN}}
           file: apis/bump.yml
-          branch: $TARGET_BUMP_BRANCH
+          branch: ${{env.TARGET_BUMP_BRANCH}}
