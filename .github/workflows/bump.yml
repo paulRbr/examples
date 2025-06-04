@@ -1,0 +1,28 @@
+name: Deploy API documentation pushes
+on:
+  push:
+    branches: [v2, v3]
+
+jobs:
+  deploy-doc:
+    name: Deploy API documentation on Bump.sh
+    runs-on: ubuntu-latest
+    env:
+      TARGET_BUMP_BRANCH: >
+        ${{
+          fromJson('{
+            "v3": "v3",
+            "v2": "v2-legacy"
+          }')[github.ref_name]
+        }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy API documentation
+        uses: bump-sh/github-action@v1
+        with:
+          doc: bump
+          token: ${{secrets.BUMP_TOKEN}}
+          file: apis/bump.yml
+          branch: $TARGET_BUMP_BRANCH
